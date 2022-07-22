@@ -1,0 +1,11 @@
+nav div{
+    font-size: larger;
+}
+
+nav div .navbar-brand{
+    font-size: larger;
+}
+
+.article-text{
+    background-color: floralwhite;
+}

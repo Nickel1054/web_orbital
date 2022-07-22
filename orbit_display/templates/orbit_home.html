@@ -1,0 +1,33 @@
+{% extends "orbit_base.html" %}
+
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+    <div class="h-100 p-5 bg-light border rounded-3">
+        <h1>This is an orbit visualisation page</h1>
+        {% if planets %}
+            <p>Select celestial bodies to display</p>
+        {% else %}
+            <p>No planets to display!</p>
+        {% endif %}
+    </div>
+
+    <hr>
+    {% if planets %}
+        <div class="h-100 p-5 bg-light border rounded-3">
+        <form action="{% url 'orbit_display:plot' objects=planets.objects %}" method="post" class="planetsform">
+            {% csrf_token %}
+{#            {{ form }}#}
+            {% for planet in planets %}
+                <input id="check-{{ planet.name }}" name="check-{{ planet.name }}" type="checkbox">
+                <label for="check-{{ planet.name }}">{{ planet.name }}</label>
+                <br>
+            {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-primary">Plot</button>
+        </form>
+        </div>
+    {% endif %}
+
+{% endblock %}
